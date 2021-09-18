@@ -1,0 +1,112 @@
+// Header
+
+header {
+    background-color: #fff;
+
+    .menu-container {
+        width: 95px;
+        height: 100%;
+        position: fixed;
+        background: #fff;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: .3s;
+        text-align: center;
+
+        .logo {
+            display: inline-block;
+            margin-top: 19px;
+            width: 75px;
+        }
+
+        .hamburger-menu {
+            margin: auto;
+            width: 32px;
+            height: 20px;
+            cursor: pointer;
+            z-index: 11;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+
+            .bar {
+                position: relative;
+                transform: translateY(7px);
+                background: #424d54;
+                border-radius: 100px;
+                width: 32px;
+                height: 3px;
+
+                &:before,
+                &:after {
+                    width: 32px;
+                    height: 3px;
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    background: #424d54;
+                    border-radius: 100px;
+                }
+
+                &:before {
+                    bottom: 10px;
+                    transition: bottom .3s cubic-bezier(.23, 1, .32, 1) .3s, transform .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
+                }
+
+                &:after {
+                    top: 10px;
+                    transition: top .3s cubic-bezier(.23, 1, .32, 1) .3s, transform .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
+                }
+            }
+
+            &:hover {
+                .bar {
+                    background: #0070ba;
+
+                    &:before,
+                    &:after {
+                        background: #0070ba;
+                    }
+                }
+            }
+        }
+
+        .botHd {
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+
+            .btnSearch {
+                width: 27px;
+                height: 27px;
+                display: inline-block;
+                background: url('/images/ico-search.png') 0 0/100% no-repeat;
+                transition: .3s;
+                &:hover{
+                    background: url('/images/ico-search-hv.png') 0 0/100% no-repeat;
+                }
+            }
+
+            p {
+                em {
+                    display: inline-block;
+                    margin: 0 5px;
+                    font-style: normal;
+                }
+
+                a {
+                    color: #a7a7a7;
+                }
+
+                span {
+                    color: #0070ba;
+                }
+            }
+        }
+    }
+}
