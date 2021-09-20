@@ -8,6 +8,7 @@ import Footer from '../Footer';
 const PageLayout = ({currentUser, location, children, check, getCurrentUser}) => {
   useEffect(() => {
     getCurrentUser();
+  //  console.log(JSON.parse(localStorage.getItem('users')))
   }, []);
 
   return (

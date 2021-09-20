@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="col-4">
             <div className="logo">
               <a href="#">
-                <img src="images/tvf_logo.png" alt="" />
+                <img src="/images/tvf_logo.png" alt="" />
               </a>
               <h4 className="md-text">Visit Us at</h4>
               <h4 className="sm-text">HA NOI (HEADQUARTER)</h4>

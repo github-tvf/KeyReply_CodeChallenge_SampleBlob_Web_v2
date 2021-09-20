@@ -19,7 +19,7 @@
 @import 'components/animations';
 // @import 'components/modal';
 // @import 'components/form';
-// @import 'components/buttons';
+@import 'components/buttons';
 // @import 'components/spinner';
 // @import 'components/swal';
 
@@ -28,5 +28,6 @@
 @import 'layout/footer';
 
 // Pages
+@import 'pages/home/authen';
 @import 'pages/home/home';
 @import 'pages/home/admin';

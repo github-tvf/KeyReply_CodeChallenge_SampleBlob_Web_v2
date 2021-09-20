@@ -1,16 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-const fixedMenu = [
-  { id: 10, name: 'tất cả', key: 'all' },
-  { id: 1, name: 'bất động sản', key: 'bds' },
-  { id: 2, name: 'du lịch - vui chơi - giải trí', key: 'dl' },
-  { id: 3, name: 'công nghiệp', key: 'cn' },
-  { id: 4, name: 'y tế', key: 'yt' },
-  { id: 5, name: 'giáo dục', key: 'gd' },
-  { id: 6, name: 'bán lẻ', key: 'bl' },
-  { id: 7, name: 'công nghệ', key: 'it' },
-  { id: 8, name: 'techvify', key: 'tvf' },
-]
+import { category } from 'components/common'
 const NewsView = ({ currentUser, location }) => {
   const [activeMenu, setActiveMenu] = React.useState('all');
   return (
@@ -20,9 +10,9 @@ const NewsView = ({ currentUser, location }) => {
           <h3 className="page-title">tin tức sự kiện</h3>
           <ul className="news-menu">
             {
-              fixedMenu.map((item, idx) => (
-                <li key={idx} className={`${activeMenu == item.key ? 'active' : ''}`}>
-                  <a href="#">{item.name} </a>
+              category.map((item, idx) => (
+                <li key={idx}>
+                  <a href="#" className={`${activeMenu == item.key ? 'active' : ''}`}>{item.name} </a>
                 </li>
               ))
             }

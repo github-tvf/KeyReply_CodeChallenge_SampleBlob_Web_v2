@@ -1,9 +1,16 @@
 import { connect } from 'react-redux';
 import PostView from './components/PostView';
-import { } from 'authentication/actions';
+import {
+  doPost,
+  getBlogByID,
+  editPost,
+} from './modules/actions'
 
-const mapDispatchToProps = { }
-
+const mapDispatchToProps = {
+  doPost,
+  getBlogByID,
+  editPost,
+}
 const mapStateToProps = (state) => ({
   currentUser: state.currentUser,
 });

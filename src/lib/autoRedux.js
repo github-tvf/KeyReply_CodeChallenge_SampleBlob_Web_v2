@@ -2,7 +2,7 @@ import cookie from 'js-cookie';
 import config from "config/app.js";
 import Strings from './strings.js';
 import queryString from "query-string";
-import { isJsonString } from './commons.js';
+import Commons from './commons.js';
 
 
 /**
@@ -22,7 +22,40 @@ let post = (url, data) => {
     }
   });
 };
-
+/**
+ * AJAX delete
+ * @param data: could be JSON or null
+ */
+let del = (url, data) => {
+  return $.ajax({
+    method: 'DELETE',
+    url: config.apiUrl + url,
+    data: JSON.stringify(data == null ? {} : data),
+    beforeSend: request => {
+      request.setRequestHeader('X-CSRFToken', cookie.get('csrftoken'));
+    },
+    xhrFields: {
+      withCredentials: true
+    }
+  });
+};
+/**
+ * AJAX patch
+ * @param data: could be JSON or null
+ */
+let patch = (url, data) => {
+  return $.ajax({
+    method: 'PATCH',
+    url: config.apiUrl + url,
+    data: JSON.stringify(data == null ? {} : data),
+    beforeSend: request => {
+      request.setRequestHeader('X-CSRFToken', cookie.get('csrftoken'));
+    },
+    xhrFields: {
+      withCredentials: true
+    }
+  });
+};
 /**
  * AJAX get
  * @param data: could be JSON or null
@@ -88,12 +121,22 @@ class AutoRedux {
         status: 'init',
         payload: this.data.payload
       });
-      let promise = this.method == 'get' ? get(this.url, this.data.payload) : post(this.url, this.data.payload)
+      // let promise = this.method == 'get' ? get(this.url, this.data.payload) : post(this.url, this.data.payload)
+      let promise = get(this.url, this.data.payload)
+      if(this.method == 'post'){
+        promise = post(this.url, this.data.payload)
+      }
+      if(this.method == 'patch'){
+        promise = put(this.url, this.data.payload)
+      }
+      if(this.method == 'delete'){
+        promise = del(this.url, this.data.payload)
+      }
       promise.then(response => {
         const status = response.status;
         //Validate data:
         if(Strings.isEmpty(response.status)) {
-          if (isJsonString(response)) {
+          if (Commons.isJsonString(response)) {
             throw new Error('Missing status field from response. Cannot dispatch. Response: ' + JSON.stringify(response))
           }
         }
@@ -119,5 +162,7 @@ export default {
   autoPost: (url) => new AutoRedux('post', url),
   autoGet: (url) =>  new AutoRedux('get', url),
   post,
-  get
+  get,
+  del,
+  patch
 }

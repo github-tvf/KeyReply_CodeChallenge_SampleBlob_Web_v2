@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Controller, Scene } from 'react-scrollmagic';
 import { Tween, Timeline } from 'react-gsap';
 import Slider from "react-slick";
 import { NavLink } from 'react-router-dom';
+import {
+  getAllBlogs
+} from '../modules/actions'
+import moment from 'moment';
 //slick setting
+const pagesize = 10000
+const pagenumber = 1
 const settings = {
   dots: !1,
   infinite: !1,
@@ -15,7 +21,11 @@ const settings = {
   arrows: !1,
   centerPadding: '40px',
 };
-const HomeView = ({ currentUser, location }) => {
+const HomeView = ({ currentUser, getAllBlogs, home }) => {
+  useEffect(() => {
+    getAllBlogs(pagesize, pagenumber)
+  }, []);
+  console.log(home.listBlog.filter(rw => rw.category === 'Hot'))
   return (
     <>
       <div className="home-page">
@@ -27,21 +37,22 @@ const HomeView = ({ currentUser, location }) => {
             <h3 className="page-title">Tin Tức Sự Kiện</h3>
             <ul className="list-news">
               {
-                [1, 2, 3].map((item, idx) => (
+                home.listBlog.length > 0 &&
+                home.listBlog.filter(rw => rw.category === 'Hot').map((post, idx) => (
                   <li key={idx}>
                     <NavLink to={'/news'}>
                       <div className="thumb">
                         <img src="/images/thumb.jpg" alt="" className="thumb_img" />
                         <img src="/images/news-gif.png" alt="" className="thumb_trans" />
                       </div>
-                      <h4 className="news-title"> “Ngày Trí tuệ nhân tạo 2021” – Nơi hội tụ những “siêu sao AI” hàng đầu thế giới</h4>
-                      <p className="news-date">23-08-2021</p>
+                      <h4 className="news-title"> {post.title}</h4>
+                      <p className="news-date">{moment(post.createdAt).format('MM-DD-YYYY')}</p>
                     </NavLink>
                   </li>
                 ))
               }
             </ul>
-            <a href="#" className="btn-view-more">Xem Thêm</a>
+            <NavLink className="btn-view-more" to={'/news'}>Xem Thêm</NavLink>
           </div>
         </section>
         <section className="tfv-tech">
@@ -101,7 +112,7 @@ const HomeView = ({ currentUser, location }) => {
                                   <img src="/images/TECHBANNER-2.png" alt="" />
                                   <div className="view-detail">
                                     <p>Với mảng Công Nghệ, TVF xác định nhiều mũi nhọn để có thể thúc đẩy đầu tư mạnh mẽ, trong đó có ba điểm chính. Đầu tiên là tập trung đầu tư đội ngũ nhân sự, hạ tầng để phát triển sản xuất phần mềm.&nbsp;Mũi nhọn thứ hai ...</p>
-                                    <a href="#" className="btn-view-more">Xem Thêm</a>
+                                    <span className="btn-view-more">Xem Thêm</span>
                                   </div>
                                 </div>
                               </a>
@@ -118,7 +129,7 @@ const HomeView = ({ currentUser, location }) => {
                                   <img src="/images/TECHBANNER-2.png" alt="" />
                                   <div className="view-detail">
                                     <p>Với mảng Công Nghệ, TVF xác định nhiều mũi nhọn để có thể thúc đẩy đầu tư mạnh mẽ, trong đó có ba điểm chính. Đầu tiên là tập trung đầu tư đội ngũ nhân sự, hạ tầng để phát triển sản xuất phần mềm.&nbsp;Mũi nhọn thứ hai ...</p>
-                                    <a href="#" className="btn-view-more">Xem Thêm</a>
+                                    <span className="btn-view-more">Xem Thêm</span>
                                   </div>
                                 </div>
                               </a>
@@ -135,7 +146,7 @@ const HomeView = ({ currentUser, location }) => {
                                   <img src="/images/TECHBANNER-2.png" alt="" />
                                   <div className="view-detail">
                                     <p>Với mảng Công Nghệ, TVF xác định nhiều mũi nhọn để có thể thúc đẩy đầu tư mạnh mẽ, trong đó có ba điểm chính. Đầu tiên là tập trung đầu tư đội ngũ nhân sự, hạ tầng để phát triển sản xuất phần mềm.&nbsp;Mũi nhọn thứ hai ...</p>
-                                    <a href="#" className="btn-view-more">Xem Thêm</a>
+                                    <span className="btn-view-more">Xem Thêm</span>
                                   </div>
                                 </div>
                               </a>

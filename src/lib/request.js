@@ -1,15 +1,38 @@
 import config from "config/app.js";
 import cookie from 'js-cookie';
 
-function checkStatus(response) {
-  return response;
-  /*if (response.status >= 200 && response.status < 300) {
+/**
+ * Parses the JSON returned by a network request
+ *
+ * @param  {object} response A response from a network request
+ *
+ * @return {object}          The parsed JSON from the request
+ */
+function parseJSON(response) {
+  if(response.status >= 200 && response.status < 300) {
+    return response.json();
+  }
+  else{
     return response;
   }
+}
 
+/**
+ * Checks if a network request came back fine, and throws an error if not
+ *
+ * @param  {object} response   A response from a network request
+ *
+ * @return {object|undefined} Returns either the response, or throws an error
+ */
+function checkStatus(response) {
+  // return response;
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  }
   const error = new Error(response.statusText);
   error.response = response;
-  throw error;*/
+  // throw error;
+  return error.response.statusText
 }
 
 /**
@@ -20,26 +43,27 @@ function checkStatus(response) {
  *
  * @return {object}           The response data
  */
-
-export default async (url, method, options) => {
+export default function request(url, method, options) {
+  //get token from param
+  //let params = new URLSearchParams(document.location.search.substring(1))
+  //let token = params.get("token")
   var initOptions = {
     method: method !== undefined ? method : 'GET',
-    credentials: 'include',
-  }
-  var headerOpts = !__DEV__ ? {
     headers: {
-      'X-CSRFToken': cookie.get('csrftoken')
-    }
-  } : {}
-  var opts = Object.assign(initOptions, headerOpts, options);
+      'Authorization': 'Basic '+ cookie.get('csrftoken'),
+      'Content-Type': 'application/json'
+    },
+    // credentials: 'include'
+  }
+  var opts = Object.assign(initOptions, options);
 
-  if(url.indexOf("http") > -1) {
+  if (url.indexOf("http") > -1) {
     url = url;
   } else {
     url = config.apiUrl + url;
   }
 
-  const result = await fetch(url, opts)
-
-  return await result.json()
+  return fetch(url, opts)
+    .then(checkStatus)
+    .then(parseJSON);
 }

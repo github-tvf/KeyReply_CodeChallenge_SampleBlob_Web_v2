@@ -7,17 +7,17 @@ import { createBrowserHistory as createHistory } from 'history';
 import { updateLocation } from 'store/location';
 import MainLayout from 'layouts/PageLayout/PageLayout'
 import Spinner from '../components/Spinner'
-
-const history = createHistory();
+import history from 'lib/history';
 const Home = React.lazy(() => import('routes/WebApp/Home'))
+const Authentication = React.lazy(() => import('routes/Authentication'))
 const News = React.lazy(() => import('routes/WebApp/News'))
 const NewsDetail = React.lazy(() => import('routes/WebApp/NewsDetail'))
-const AdminHome = React.lazy(() => import('routes/Admin/Home'))
+const AdminView = React.lazy(() => import('routes/Admin/Admin'))
 const PostView = React.lazy(() => import('routes/Admin/Post'))
 
 const App = ({store}) => {
   useEffect(() => {
-    history.listen(updateLocation(store));
+  
   }, []);
 
   return (
@@ -33,13 +33,16 @@ const App = ({store}) => {
               <Route exact path="/" component={Home} />
             </Switch>
             <Switch>
+              <Route exact path="/login" component={Authentication} />
+            </Switch>
+            <Switch>
               <Route exact path="/news" component={News} />
             </Switch>
             <Switch>
               <Route exact path="/news/detail" component={NewsDetail} />
             </Switch>
             <Switch>
-              <Route exact path="/admin" component={AdminHome} />
+              <Route exact path="/admin" component={AdminView} />
             </Switch>
             <Switch>
               <Route exact path="/admin/post" component={PostView} />

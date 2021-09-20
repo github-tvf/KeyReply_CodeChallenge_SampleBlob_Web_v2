@@ -14,21 +14,22 @@ export const isCurrentUserFetching = () => {
 
 export const getCurrentUser = () => {
   return (dispatch, getState) => {
-    dispatch(isCurrentUserFetching());
-    request('api/user/get').then(function(response) {
-      if(response.status == 'successful') {
-        dispatch(getCurrentUserSuccess(response));
-      } else {
-        dispatch(getCurrentUserError(response));
-      }
-    });
+    dispatch(getCurrentUserSuccess(JSON.parse(localStorage.getItem('users'))))
+    // dispatch(isCurrentUserFetching());
+    // request('blog/all?take=50&page=1').then(function(response) {
+    //   if(response.status == 'successful') {
+    //     dispatch(getCurrentUserSuccess(response));
+    //   } else {
+    //     dispatch(getCurrentUserError(response));
+    //   }
+    // });
   };
 }
 
 export const getCurrentUserSuccess = (response) => {
   return {
     type: CURRENT_USER_REQUEST_SUCCESS,
-    payload: response.payload
+    payload: response
   };
 }
 
