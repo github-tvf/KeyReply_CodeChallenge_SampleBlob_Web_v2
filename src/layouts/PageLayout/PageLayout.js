@@ -1,19 +1,17 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { getCurrentUser } from 'authentication/actions';
+import { getCurrentUser,Logout } from 'authentication/actions';
 import Header from '../Header';
 import Footer from '../Footer';
 
 const PageLayout = ({currentUser, location, children, check, getCurrentUser}) => {
   useEffect(() => {
     getCurrentUser();
-  //  console.log(JSON.parse(localStorage.getItem('users')))
   }, []);
-
   return (
     <>
-      <Header/>
+      <Header currentUser={currentUser}/>
       <main id="main" className={`page-${location.pathname !== '/' ? location.pathname.replace('/', '') : 'home'}`}>
         <>
           {children}
@@ -25,7 +23,8 @@ const PageLayout = ({currentUser, location, children, check, getCurrentUser}) =>
 };
 
 const mapDispatchToProps = {
-  getCurrentUser
+  getCurrentUser,
+  Logout
 };
 
 const mapStateToProps = (state) => ({

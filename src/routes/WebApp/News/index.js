@@ -1,11 +1,17 @@
 import { connect } from 'react-redux';
 import NewsView from './components/NewsView';
-import { } from 'authentication/actions';
+import {
+  getAllBlogs
+} from './modules/actions'
 
-const mapDispatchToProps = { }
+const mapDispatchToProps = { 
+  getAllBlogs
+}
 
 const mapStateToProps = (state) => ({
   currentUser: state.currentUser,
+  home: state.home,
+  news: state.news,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsView);

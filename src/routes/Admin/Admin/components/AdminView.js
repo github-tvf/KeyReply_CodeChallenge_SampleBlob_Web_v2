@@ -15,6 +15,7 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+// import EditIcon from '@mui/icons-material/Edit';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment'
 import swal from 'sweetalert2';
@@ -130,7 +131,7 @@ const AdminView = ({ currentUser,admin, getBlogByUID,deleteBlog,  }) => {
       <div className="tvf-container">
         <h4 className="adm-title">Quản lý bài viết</h4>
         <div className="group-btn">
-          <NavLink to={'/admin/post'}>Create Pos</NavLink>
+          <NavLink className="btn btn--tvf" to={'/admin/post'}>Create Pos</NavLink>
         </div>
         <div className="table-result">
           {
@@ -156,12 +157,13 @@ const AdminView = ({ currentUser,admin, getBlogByUID,deleteBlog,  }) => {
                       <TableCell component="th" scope="row">
                         {idx + 1}
                       </TableCell>
-                      <TableCell align="center">{row.thumbnail}</TableCell>
+                      <TableCell align="center"><img className="img-thumb" src={row.thumbnail} alt="" /> </TableCell>
                       <TableCell align="center">{row.title}</TableCell>
                       <TableCell align="center">{row.category}</TableCell>
                       <TableCell align="center">{moment(row.createdAt).format('MM-DD-YYYY')}</TableCell>
                       <TableCell align="center">
                         <NavLink to={'/admin/post?id='+row.id}>Edit</NavLink>
+                        &nbsp;&nbsp;&nbsp;
                         <a href="#" onClick={e => {
                           e.preventDefault(),
                             handleDeletePost(row)

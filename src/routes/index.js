@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense } from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route,Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Switch } from 'react-router';
@@ -7,6 +7,7 @@ import { createBrowserHistory as createHistory } from 'history';
 import { updateLocation } from 'store/location';
 import MainLayout from 'layouts/PageLayout/PageLayout'
 import Spinner from '../components/Spinner'
+import { PrivateRoute } from '../privateRoute/privateRoute'
 import history from 'lib/history';
 const Home = React.lazy(() => import('routes/WebApp/Home'))
 const Authentication = React.lazy(() => import('routes/Authentication'))
@@ -15,9 +16,9 @@ const NewsDetail = React.lazy(() => import('routes/WebApp/NewsDetail'))
 const AdminView = React.lazy(() => import('routes/Admin/Admin'))
 const PostView = React.lazy(() => import('routes/Admin/Post'))
 
-const App = ({store}) => {
+const App = ({ store }) => {
   useEffect(() => {
-  
+
   }, []);
 
   return (
@@ -42,10 +43,10 @@ const App = ({store}) => {
               <Route exact path="/news/detail" component={NewsDetail} />
             </Switch>
             <Switch>
-              <Route exact path="/admin" component={AdminView} />
+              <PrivateRoute exact path="/admin" component={AdminView} />
             </Switch>
             <Switch>
-              <Route exact path="/admin/post" component={PostView} />
+              <PrivateRoute exact path="/admin/post" component={PostView} />
             </Switch>
           </MainLayout>
         </Suspense>

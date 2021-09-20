@@ -33,6 +33,7 @@ header {
             transform: translate3d(-50%, -50%, 0);
 
             .bar {
+                display: block;
                 position: relative;
                 transform: translateY(7px);
                 background: #424d54;
@@ -87,7 +88,8 @@ header {
                 display: inline-block;
                 background: url('/images/ico-search.png') 0 0/100% no-repeat;
                 transition: .3s;
-                &:hover{
+
+                &:hover {
                     background: url('/images/ico-search-hv.png') 0 0/100% no-repeat;
                 }
             }
@@ -105,6 +107,109 @@ header {
 
                 span {
                     color: #0070ba;
+                }
+            }
+        }
+
+        &.is-active {
+            background: $tvf-color;
+
+            .hamburger-menu {
+                .bar {
+                    background: rgba(255, 255, 255, 0) !important;
+
+                    &:before,
+                    &:after {
+                        background: #fff;
+                    }
+
+                    &:before {
+                        bottom: 0;
+                        transform: rotate(-45deg);
+                        transition: bottom .3s cubic-bezier(.23, 1, .32, 1), transform .3s cubic-bezier(.23, 1, .32, 1) .3s, -webkit-transform .3s cubic-bezier(.23, 1, .32, 1) .3s;
+                    }
+
+                    &:after {
+                        top: 0;
+                        transform: rotate(45deg);
+                        transition: top .3s cubic-bezier(.23, 1, .32, 1), transform .3s cubic-bezier(.23, 1, .32, 1) .3s, -webkit-transform .3s cubic-bezier(.23, 1, .32, 1) .3s;
+                    }
+                }
+
+                &:hover {
+                    .bar {
+                        background: #fff;
+
+                        &:before,
+                        &:after {
+                            background: #fff;
+                        }
+                    }
+                }
+            }
+
+            .botHd {
+                p {
+                    a {
+                        color: #a7a7a7;
+                    }
+
+                    span {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+
+    .active-menu {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        z-index: 1;
+        padding-left: 220px;
+        padding-top: 50px;
+        display: none;
+        &.is-active{
+            display: block;
+        }
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            li {
+                animation-duration: 1s;
+                &:nth-child(2){
+                    animation-delay: 0.2s;
+                }
+                &:nth-child(3){
+                    animation-delay: 0.4s;
+                }
+                &:nth-child(4){
+                    animation-delay: 0.6s;
+                }
+                a {
+                    font-family: 'Rift', sans-serif;
+                    display: block;
+                    font-size: 36px;
+                    color: #a7a7a7;
+                    transition: .3s;
+                    padding: 5px 0;
+                    font-weight: 500;
+                    text-transform: uppercase;
+
+                    &.active {
+                        color: $tvf-color;
+                    }
+
+                    &:hover {
+                        padding-left: 20px;
+                        color: $tvf-color;
+                    }
                 }
             }
         }

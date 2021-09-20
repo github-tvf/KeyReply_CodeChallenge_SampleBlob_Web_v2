@@ -29,8 +29,8 @@ const RegisterForm = ({ parentCallback,callbackRegister  }) => {
       }} id="registerForm">
         <div className="signin__form--control">
           <label htmlFor="">Email</label>
-          <input type="email" className="sign__control" placeholder="pigeon@nestcoop.com" required id="regsiterEmail" value={registerEmail}
-            onChange={e => setRegisterEmail(e.target.value)} id="regsiterEmail" />
+          <input type="email" className="sign__control" placeholder="sample@domain.com" required id="regsiterEmail" value={registerEmail}
+            onChange={e => setRegisterEmail(e.target.value)}/>
         </div>
         <div className="signin__form--control">
           <label htmlFor="">Password</label>

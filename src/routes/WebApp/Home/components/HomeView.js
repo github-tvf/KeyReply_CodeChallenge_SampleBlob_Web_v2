@@ -3,9 +3,6 @@ import { Controller, Scene } from 'react-scrollmagic';
 import { Tween, Timeline } from 'react-gsap';
 import Slider from "react-slick";
 import { NavLink } from 'react-router-dom';
-import {
-  getAllBlogs
-} from '../modules/actions'
 import moment from 'moment';
 //slick setting
 const pagesize = 10000
@@ -25,12 +22,15 @@ const HomeView = ({ currentUser, getAllBlogs, home }) => {
   useEffect(() => {
     getAllBlogs(pagesize, pagenumber)
   }, []);
-  console.log(home.listBlog.filter(rw => rw.category === 'Hot'))
   return (
     <>
       <div className="home-page">
         <section className="home-banner animated animate__fadeInUp">
           <img src="/images/Landmark81banner.jpg" alt="" />
+          <div className="scroll-animated">
+            <span >Scroll<br />Down</span>
+            <img src="/images/scrolldown-icon.png" alt="" />
+          </div>
         </section>
         <section className="news">
           <div className="tvf-container">

@@ -1,6 +1,5 @@
 
 .section-admin{
-  padding-top: 120px;
   .list-post {
     padding: 0;
     margin: 0 auto;
@@ -45,4 +44,15 @@
       }
     }
   }
+  .signin__form{
+    &--control{
+      margin-bottom: 15px;
+      label{
+        display: block;
+      }
+    }
+  }
+}
+.img-thumb{
+  width: 200px;
 }
